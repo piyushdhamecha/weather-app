@@ -6,9 +6,11 @@ import React from "react";
 import ThemeDropdown from "./ThemeDropdown/ThemeDropdown";
 import { Github } from "lucide-react";
 import SearchDialog from "./SearchDialog/SearchDialog";
+import { useGlobalContext } from "../context/globalContext";
 
 const Navbar = () => {
   const router = useRouter();
+  const { state } = useGlobalContext();
 
   return (
     <div className="w-full py-4 flex item-center justify-between">

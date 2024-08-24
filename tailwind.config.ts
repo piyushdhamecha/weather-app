@@ -7,13 +7,15 @@ const config = {
     './components/**/*.{ts,tsx}',
     './app/**/*.{ts,tsx}',
     './src/**/*.{ts,tsx}',
-	],
+  ],
   prefix: "",
   theme: {
     container: {
       center: true,
       padding: "2rem",
       screens: {
+        "sm-2": "581px",
+        "md-2": "1100px",
         "2xl": "1400px",
       },
     },
@@ -52,6 +54,7 @@ const config = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        "dark-grey": "#0a0a0a",
       },
       borderRadius: {
         lg: "var(--radius)",
