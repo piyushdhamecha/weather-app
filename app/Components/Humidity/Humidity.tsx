@@ -9,7 +9,7 @@ import React from 'react'
 function Humidity() {
   const { forecastData } = useGlobalContext()
 
-  if (!forecastData || !forecastData?.main || !forecastData?.main?.feels_like) {
+  if (!forecastData || !forecastData?.main || !forecastData?.main?.humidity) {
     return <Skeleton className='h-[12rem] w-full' />
   }
 
