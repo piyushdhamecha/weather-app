@@ -7,15 +7,15 @@ export async function GET(req: NextRequest) {
     const lat = 40.7128
     const lon = -74.006
 
-    const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}`
+    const url = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}`
 
     const response = await axios.get(url)
 
     return NextResponse.json(response.data)
   } catch (error) {
-    console.log('Error fetching forecast data')
+    console.log('Error fetching fiveday data')
 
-    return new Response('Error fetching forecast data', {
+    return new Response('Error fetching fiveday data', {
       status: 500
     })
   }

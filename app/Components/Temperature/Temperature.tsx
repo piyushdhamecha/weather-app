@@ -77,7 +77,7 @@ export default function Temperature() {
         <span className="font-medium">{currentDay}</span>
         <span className="font-medium">{localTime}</span>
       </p>
-      <p className="font-bold flex gap-1">
+      <p className="font-bold flex gap-1 pt-1">
         <span>{name}</span>
         <span>
           <Navigation />
@@ -87,9 +87,9 @@ export default function Temperature() {
       <div>
         <div>
           <span>{getIcon()}</span>
-          <p className="pt-2 capitalize text-lg font-medium">{description}</p>
+          <p className="pt-3 capitalize text-lg font-medium">{description}</p>
         </div>
-        <p className="flex items-center gap-2">
+        <p className="flex items-center gap-2 pt-2">
           <span>Low: {minTemp}&deg;</span>
           <span>High: {maxTemp}&deg;</span>
         </p>
