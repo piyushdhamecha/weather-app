@@ -22,15 +22,15 @@ function Visibility() {
       return 'Excellent: Clear and vast view'
     }
 
-    if (visibility > 5) {
+    if (visibilityInKm > 5) {
       return 'Good: Easily navigable'
     }
 
-    if (visibility > 2) {
+    if (visibilityInKm > 2) {
       return 'Moderate: Some limitations'
     }
 
-    if (visibility <= 2) {
+    if (visibilityInKm <= 2) {
       return 'Poor: Restricted and unclear'
     }
 
