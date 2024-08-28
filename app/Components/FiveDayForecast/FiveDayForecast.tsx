@@ -60,14 +60,16 @@ function FiveDayForecast() {
   const dailyForecast: any = []
 
   Object.keys(groupedData).forEach((key, i) => {
-    dailyForecast.push(processData(groupedData[key]))
+    if (i <= 3) {
+      dailyForecast.push(processData(groupedData[key]))
+    }
   })
 
   return (
     <div className='pt-6 pb-5 px-4 flex-1 border rounded-lg flex flex-col justify-between dark:bg-dark-grey shadow-sm dark:shadow-none'>
       <div>
         <h2 className='flex items-center gap-2 font-medium'>
-          <Calendar /> 5-Day forecast for {city.name}
+          <Calendar /> 4-Day forecast for {city.name}
         </h2>
         <div className='forecast-list pt-3'>
           {dailyForecast.map((item: any, i: number) => (
