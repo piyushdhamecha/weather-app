@@ -37,6 +37,7 @@ function Mapbox() {
   return (
     <div className='flex-1 basis-[50%] border rounded-lg h-full'>
       <MapContainer
+        // @ts-ignore
         center={[activeCityCoords?.lat, activeCityCoords?.lon]}
         zoom={13}
         scrollWheelZoom={false}
@@ -44,6 +45,7 @@ function Mapbox() {
         style={{ height: "calc(100% - 2rem)", width: 'calc(100% - 2rem)' }}
       >
         <TileLayer
+          // @ts-ignore
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />

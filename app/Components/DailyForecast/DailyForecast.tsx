@@ -56,8 +56,8 @@ export default function DailyForecast() {
       <div className='h-full flex gap-10 overflow-hidden'>
         {todaysForecast.length < 1
           ? (
-            <div>
-              <h1 className='text-[3rem] line-through text-rose-500'>No data available!</h1>
+            <div className='flex justify-center items-center w-full'>
+              <h1 className='text-[2.5rem] line-through text-rose-500'>No data available!</h1>
             </div>
           ) : (
             <div className='w-full'>

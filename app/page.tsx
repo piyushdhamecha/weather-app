@@ -1,4 +1,5 @@
-import Image from "next/image";
+'use client'
+
 import Navbar from "./Components/Navbar";
 import Temperature from "./Components/Temperature/Temperature";
 import AirPollution from "./Components/AirPollution/AirPollution";
@@ -14,6 +15,7 @@ import Pressure from "./Components/Pressure/Pressure";
 import defaultStates from "./utils/defaultStates";
 import FiveDayForecast from "./Components/FiveDayForecast/FiveDayForecast";
 import dynamic from "next/dynamic";
+import { useGlobalContext } from "./context/globalContext";
 
 const Mapbox = dynamic(() => import("./Components/Mapbox/Mapbox"), {
   ssr: false,
@@ -21,6 +23,8 @@ const Mapbox = dynamic(() => import("./Components/Mapbox/Mapbox"), {
 
 
 export default function Home() {
+  const { setActiveCityCoords } = useGlobalContext()
+
   return (
     <main className="mx-[1rem] lg:mx-[2rem] xl:mx-[6rem] 2xl:mx-[6rem] m-aut min-h-screen">
       <Navbar />
@@ -51,7 +55,11 @@ export default function Home() {
               <div className="flex flex-col gap-4">
                 {defaultStates.map((item, index) => {
                   return (
-                    <div key={index} className="border rounded-lg cursor-pointer dark:bg-dark-grey shadow-sm dark:shadow-none">
+                    <div
+                      key={index}
+                      className="border rounded-lg cursor-pointer dark:bg-dark-grey shadow-sm dark:shadow-none"
+                      onClick={() => setActiveCityCoords([item.lat, item.lon])}
+                    >
                       <p className="px-6 py-4">{item.name}</p>
                     </div>
                   )

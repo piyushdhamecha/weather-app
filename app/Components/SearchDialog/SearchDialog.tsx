@@ -1,12 +1,16 @@
 "use client";
 
+import { useGlobalContext } from "@/app/context/globalContext";
 import { Button } from "@/components/ui/button";
-import { Command, CommandInput } from "@/components/ui/command";
+import { Command, CommandInput, CommandItem, CommandList } from "@/components/ui/command";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
-import { Search, Command as CommandIcon } from "lucide-react";
-import React from "react";
+import { Command as CommandIcon } from "lucide-react";
+import React, { useState } from "react";
 
 export default function SearchDialog() {
+  const { geoCodedList, inputValue, handleInput, setActiveCityCoords } = useGlobalContext()
+  const [hoverIndex, setHoverIndex] = useState<number>()
+
   return (
     <div className="search-btn">
       <Dialog>
@@ -24,10 +28,34 @@ export default function SearchDialog() {
         </DialogTrigger>
         <DialogContent className="p-0">
           <Command className="rounded-lg border shadow-md">
-            <CommandInput placeholder="Type a command or search..." />
-            <ul className="px-3 pb-2">
-              <p className="p-2 text-sm text-muted-foreground">Suggestions</p>
-            </ul>
+            <CommandInput
+              placeholder="Type a command or search..."
+              value={inputValue}
+              onValueChange={handleInput}
+            />
+            <CommandList>
+              <ul className="px-3 pb-2">
+                <p className="p-2 text-sm text-muted-foreground">Suggestions</p>
+                {geoCodedList.length === 0 && <p>No results</p>}
+                {geoCodedList.map((item: { country: string, state: string, name: string, lat: number, lon: number }, i: number) => {
+                  const { country, state, name } = item
+                  return (
+                    <li
+                      key={i}
+                      className={`py-3 px-3 text-sm rounded-sm hover:bg-accent cursor-default
+                        ${hoverIndex === i ? 'bg-accent' : ''}  
+                      `}
+                      onMouseEnter={() => setHoverIndex(i)}
+                      onClick={() => setActiveCityCoords([item.lat, item.lon])}
+                    >
+                      <p className="text">
+                        {name}, {state && state + ','} {country}
+                      </p>
+                    </li>
+                  )
+                })}
+              </ul>
+            </CommandList>
           </Command>
         </DialogContent>
       </Dialog>

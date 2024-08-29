@@ -4,7 +4,7 @@ import { useGlobalContext } from "@/app/context/globalContext";
 import { airQualityIndexText } from "@/app/utils/misc";
 import { Progress } from "@/components/ui/progress";
 import { Skeleton } from "@/components/ui/skeleton";
-import { Thermometer, ThermometerSun } from "lucide-react";
+import { ThermometerSun } from "lucide-react";
 import React from "react";
 
 export default function AirPollution() {
