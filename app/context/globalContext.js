@@ -1,7 +1,7 @@
 'use client'
 import axios from "axios"
 import React, { createContext, useState, useContext, useEffect } from "react"
-import { debounce } from 'lodash'
+import { debounce, isEmpty } from 'lodash'
 import defaultStates from "../utils/defaultStates"
 
 const GlobalContext = createContext()
@@ -14,8 +14,9 @@ export const GlobalContextProvider = ({ children }) => {
   const [uvData, setUvData] = useState({})
   const [inputValue, setInputValue] = useState('')
   const [activeCityCoords, setActiveCityCoords] = useState([40.7128, -74.006])
-
   const [geoCodedList, setGeoCodedList] = useState(defaultStates)
+
+  const [isAllDataFetched, setIsAllDataFetched] = useState(false)
 
   const fetchForecast = async (lat, lon) => {
     try {
@@ -77,6 +78,17 @@ export const GlobalContextProvider = ({ children }) => {
     return () => debouncedFetch.cancel()
   }, [inputValue])
 
+  useEffect(() => {
+    if (
+      !isEmpty(forecastData)
+      && !isEmpty(airQuality)
+      && !isEmpty(fiveDayForecast)
+      && !isEmpty(uvData)
+    ) {
+      setIsAllDataFetched(true)
+    }
+  }, [forecastData, airQuality, fiveDayForecast, uvData, setIsAllDataFetched])
+
   const fetchGeoCodedList = async (search) => {
     try {
       const response = await axios.get(`api/geocoded?search=${search}`)
@@ -106,6 +118,7 @@ export const GlobalContextProvider = ({ children }) => {
         handleInput,
         fetchGeoCodedList,
         setActiveCityCoords,
+        isAllDataFetched,
       }}
     >
       <GlobalContextUpdate.Provider>
